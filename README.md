@@ -11,7 +11,7 @@ Frontend : Ongoing.
 #### Project Description 
 1.10+ api endpoint (get,post,delete,patch).
 
-2.JWT for autorization.
+2.JWT for authorization for faculty,student,cco,admin.
 
 3.automatic mail to student after a new post post by faculty.
 
