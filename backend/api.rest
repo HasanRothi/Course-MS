@@ -1,0 +1,53 @@
+post http://localhost:3000/student
+Content-Type: application/json
+
+{
+      "userId" : "16255002",
+     "name":"Nirab",
+     "password" : "naire1234",
+     "dept" : "CSE",
+     "phone":"015",
+     "mail":"nirab@gmail.com"
+}
+
+
+###
+DELETE   http://localhost:3000/student/removecourse/16255010
+Content-Type: application/json
+
+{
+      "course":["5f8a6700b110c2143c8256e9"]
+}
+###
+PATCH  https://ucam-it.herokuapp.com/coursenotice/5f87c923f3c5880017b4b30e
+Content-Type: application/json
+
+{
+      "noticeDetails" : "let's see"
+}
+
+###
+Delete https://ucam-it.herokuapp.com/student/16255008
+
+###
+Get  https://ucam-it.herokuapp.com/faculty
+Content-Type: application/json
+
+{
+      "dept" : "CIVIL"
+}
+
+###
+POST   https://ucam-it.herokuapp.com/library
+Content-Type: application/json
+
+{
+      "name":"Android",
+      "author":"Abc",
+      "category" : "CSE-IT",
+      "edition": 2,
+      "total" : 20
+}
+
+###
+DELETE http://localhost:3000/library/5f962ff39fed0b24c89eff93
