@@ -5,27 +5,24 @@ export const state = () => ({
 })
 
 export const mutations = {
-    setLoggedIn(state, userRole, userId = null) {
+    setLoggedIn(state, userRole, userId="16255008") {
         state.isLoggedIn = true
         state.userId = userId
         state.userRole = userRole
-        console.log("inside mutation")
+        console.log("inside mutation" + userRole + userId)
     },
     setLoggedOut(state) {
+        console.log("Logout from mutations")
         state.isLoggedIn = false
         state.userId = null
         state.userRole = null
-        this.$auth.$storage.removeLocalStorage("userRole");
-        this.$auth.$storage.removeLocalStorage("userId");
     }
 }
 export const actions = {
     async updateLoggedIn({ commit }, { userRole, userId }) {
-        console.log("inside action")
-        if (process.browser) {
-            this.$auth.$storage.setLocalStorage("userRole", userRole);
-            this.$auth.$storage.setLocalStorage("userId", userId);
-        }
+        console.log("inside action" + userRole + userId)
+             await this.$localForage.setItem("userRole", userRole)
+             await this.$localForage.setItem("userId", userId)
         commit('setLoggedIn', userRole, userId)
     },
     async loggedOut({ commit }) {
@@ -39,7 +36,7 @@ export const getters = {
             userRole: state.userRole,
             userId: state.userId
         }
-        console.log(userInfo)
+        console.log('Inside getters', userInfo)
         return userInfo
     }
 

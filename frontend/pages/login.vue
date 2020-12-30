@@ -21,10 +21,12 @@
         <FormulateInput type="submit" label="Login" />
       </FormulateForm>
     </v-card>
+     <snackBar v-if="snackbar" />
   </v-container>
 </template>
 
 <script>
+import snackBar from '../components/snakbar/snackbar'
 export default {
   layout: "login",
   head() {
@@ -36,22 +38,40 @@ export default {
     return {
       formValues: {},
       userId: "",
-      password: ""
+      password: "",
+      snackbar: false
     };
   },
+  components: {
+    snackBar
+  },
   methods: {
-    loginUser({ store, redirect }) {
-      localStorage.setItem("auth", true);
+    async loginUser({ store, redirect }) {
       var userRole;
       this.formValues.userId.length > 3
         ? (userRole = "student")
         : (userRole = "faculty");
       var userId = this.formValues.userId;
+      console.log("Ok ---- "+userRole + userId)
+      //check auth
+     await this.$axios.$get(`/${userRole}/${userId}`)
+    .then((res)=>{
+     if(res[0].password === this.formValues.password){
       this.$store.dispatch("login/updateLoggedIn", { userRole, userId });
-      //  this.$router.redirect(`/${userRole}/${userId}`)
-      //  redirect(`/${userRole}/${userId}`)
-      // this.$router.replace(`/${userRole}/${userId}`)
       this.$router.push(`/${userRole}/${userId}`);
+     }
+     else{
+      this.$store.dispatch('snackbar/callSnackbarInfo',{message:"Sorry ! Try again..",color:'#FF0000',time:"2000"})
+      this.snackbar = true
+     }
+    }).catch((err)=>{
+      console.log(err)
+    })
+      // this.$store.dispatch("login/updateLoggedIn", { userRole, userId });
+      // //  this.$router.redirect(`/${userRole}/${userId}`)
+      // //  redirect(`/${userRole}/${userId}`)
+      // // this.$router.replace(`/${userRole}/${userId}`)
+      // this.$router.push(`/${userRole}/${userId}`);
     }
   }
 };

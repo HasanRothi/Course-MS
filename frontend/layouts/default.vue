@@ -2,18 +2,18 @@
   <v-app dark >
     <v-app-bar fixed dense app >
 
-      <v-btn  to="/" class="rounded-lg">
+      <v-btn text to="/" class="rounded-lg">
         <v-icon>mdi-home</v-icon>
        Home
       </v-btn>
- <!-- <v-switch class="pt-6 pl-2 text-capitalize"
+ <v-switch class="pt-6 pl-2 text-capitalize"
       v-model="switch1"
       inset
        label="dark mode"
               color="black"
               value="black"
 
-    ></v-switch> -->
+    ></v-switch>
       <v-spacer />
       <!-- Dept Menu bar -->
       <v-menu
@@ -34,7 +34,7 @@
             offset-x="10"
             offset-y="10"
         >
-              <v-btn v-bind="attrs" v-on="{ ...tooltip, ...menu }" class="rounded-bl-xl">
+              <v-btn text v-bind="attrs" v-on="{ ...tooltip, ...menu }" class="rounded-bl-xl">
                 <v-icon>mdi-layers</v-icon>
                 Dept
               </v-btn>
@@ -47,7 +47,7 @@
         <v-list class="#f0932b " >
           <v-list-item v-for="(item, index) in itemDept" :key="index" link>
             <v-list-item-title>
-              <v-btn block class="orange" :to="`/dept/${item}`">
+              <v-btn block text class="orange" :to="`/dept/${item}`">
                 {{ item }}</v-btn
               >
             </v-list-item-title>
@@ -64,10 +64,10 @@
             offset-x="10"
             offset-y="10"
         >
-      <v-btn to="/library" class="rounded-bl-xl"><v-icon>mdi-library</v-icon>Library</v-btn>
+      <v-btn text to="/library" class="rounded-bl-xl"><v-icon>mdi-library</v-icon>Library</v-btn>
       </v-badge>
-       <v-btn to="/coding" class="rounded-t-xl"  outlined color="blue"><v-icon>mdi-code-tags</v-icon>Coding</v-btn>
-      <v-btn v-if="userId" :to="`/${userRole}/${userId}`">
+       <v-btn text to="/coding" class="rounded-t-xl"  outlined color="blue"><v-icon>mdi-code-tags</v-icon>Coding</v-btn>
+      <v-btn text v-if="userId" :to="`/${userRole}/${userId}`">
         <v-icon>mdi-account</v-icon>{{ userId }}</v-btn
       >
       <div>
@@ -78,12 +78,12 @@
         icon="mdi-lock"
         overlap
       >
-        <v-btn v-if="!userId" to="/login" class="rounded-b-xl">Login</v-btn>
+        <v-btn text v-if="!userId" to="/login" class="rounded-b-xl">Login</v-btn>
          </v-badge>
         <!--User  Menu Bar  -->
-        <v-menu bottom left>
+        <v-menu bottom left v-if="userId">
           <template v-slot:activator="{ on, attrs }">
-            <v-btn v-if="userId" v-bind="attrs" v-on="on">
+            <v-btn  text v-bind="attrs" v-on="on">
               <v-icon>mdi-dots-vertical</v-icon>
             </v-btn>
           </template>
@@ -142,10 +142,18 @@ export default {
   },
   async created() {
     // this.$vuetify.theme.dark = true;
-    this.userRole = "faculty";
-    this.userId = "MII"
+
+    // console.log("Keys --- "+ this.$localForage.keys() )
+    this.userRole = await this.$localForage.getItem("userRole").then((x)=>{
+      console.log("The object promise is (userRole) : " + x)
+      return x
+    })
+     this.userId = await this.$localForage.getItem("userId").then((x)=>{
+      console.log("The object promise is (userRole) :" + x)
+      return x
+    })
     // console.log("User - " , this.userId)
-    // console.log(" Local UserRole -- "+this.$auth.$storage.getLocalStorage("userRole") , " Local User -- "+this.$auth.$storage.getLocalStorage("userId"))
+    console.log(" Local Forage -- "+ this.userRole +" --- "+this.userId)
     if(this.userId){
     await this.$axios
       .$get(`/${this.userRole}/${this.userId}`)
@@ -175,16 +183,16 @@ export default {
   },
   watch: {
    switch1: function (val) {
-      // console.log(this.switch1)
       if(this.switch1=="black") {this.$vuetify.theme.dark = true;}
       else this.$vuetify.theme.dark = false
     },
   },
   methods: {
-    logout() {
-      console.log("logout");
-      localStorage.clear();
+    async logout() {
+      this.userId = null,this.userRole=null
+      this.$localforage.clear();
       this.$store.dispatch("login/loggedOut");
+      this.$router.push('/')
     }
   }
 };

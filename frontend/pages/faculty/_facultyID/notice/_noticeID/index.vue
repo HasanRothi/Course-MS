@@ -1,6 +1,5 @@
 <template>
   <div>
-      
       <v-card dark style="text-align:center;" class="pa-2">
           <v-btn :to="`/faculty/${this.$route.params.facultyID}`"><v-icon
         color="purple darken-2"

@@ -87,14 +87,21 @@
 
         <v-divider></v-divider>
 
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <FormulateInput type="text" v-model="message"/>
-          <v-btn
-            color="dark" @click="sendMessage()"
+        <v-card-actions class="pa-0">
+          <v-row class="ma-0 pa-0">
+            <v-col cols="12" sm="10" class="pa-1">
+              <FormulateInput type="text" v-model="message"/>
+            </v-col>
+             <v-col cols="12" sm="2" class="pa-1">
+                <v-btn
+                icon
+                color="green"
+                 @click="sendMessage()"
           >
             <v-icon>mdi-send</v-icon>
           </v-btn>
+             </v-col>
+          </v-row>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -128,11 +135,17 @@ data(){
         title: `Student | ${this.$route.params.studentID} |  ${this.$route.params.noticeID}`
       }
   },
+  watch: {
+    chatHeight () {
+      return document.body.scrollHeight
+    }
+  },
 component(){
     NoticeView
     // Chat
 },
 async created(){
+  console.log(document.body.scrollHeight)
     await this.$axios.$get(`course/${this.courseCode}`)
     .then((res)=>{
       this.courseInfo = res[0]
@@ -153,6 +166,7 @@ methods:{
      await this.$axios.$post(`chat/message/${this.courseCode}`,messageInfo)
     .then((res)=>{
       console.log(res)
+      this.message = ''
       this.getChatInfo()
     }).catch((err)=>{
       console.log(err)

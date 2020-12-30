@@ -8,11 +8,7 @@ const moment = require('moment')
 const basePath = "https://ucam-it.herokuapp.com/";
 //chat all
 router.get("/", (req, res, next) => {
-
-
-
-
-
+    // console.log('log check ',req.connection.remoteAddress)
     Chat.find().select()
         .then((result) => {
             res.json(result)

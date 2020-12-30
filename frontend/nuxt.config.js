@@ -36,7 +36,7 @@ export default {
     ],
 
     // Modules (https://go.nuxtjs.dev/config-modules)
-    modules: ['@nuxtjs/axios', '@nuxtjs/auth'],
+    modules: ['@nuxtjs/axios',   '@nuxtjs/localforage',],
     auth: {
         localStorage: {
             prefix: 'auth.'

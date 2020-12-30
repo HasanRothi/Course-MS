@@ -1,5 +1,6 @@
 <template>
   <v-container>
+    <facultyOwn/>
       <v-card style="width:100% ; font-family:cursive;" class="blue">
      <v-row style="text-align:center">
         <v-col  cols="12"
