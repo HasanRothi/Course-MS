@@ -2,9 +2,8 @@
   <v-app dark >
     <v-app-bar fixed dense app >
 
-      <v-btn text to="/" class="rounded-lg">
+      <v-btn icon to="/" class="rounded-lg">
         <v-icon>mdi-home</v-icon>
-       Home
       </v-btn>
  <v-switch class="pt-6 pl-2 text-capitalize"
       v-model="switch1"
@@ -64,9 +63,9 @@
             offset-x="10"
             offset-y="10"
         >
-      <v-btn text to="/library" class="rounded-bl-xl"><v-icon>mdi-library</v-icon>Library</v-btn>
+      <v-btn text to="/library"><v-icon>mdi-library</v-icon>Library</v-btn>
       </v-badge>
-       <v-btn text to="/coding" class="rounded-t-xl"  outlined color="blue"><v-icon>mdi-code-tags</v-icon>Coding</v-btn>
+       <v-btn text to="/coding"  outlined color="blue"><v-icon>mdi-code-tags</v-icon>Coding</v-btn>
       <v-btn text v-if="userId" :to="`/${userRole}/${userId}`">
         <v-icon>mdi-account</v-icon>{{ userId }}</v-btn
       >

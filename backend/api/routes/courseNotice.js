@@ -19,12 +19,12 @@ router.get("/", (req, res, next) => {
                 "Number of notice": allNotice.length,
                 Notice: allNotice.map((notice) => {
                     return {
-                        NoticeId: notice._id,
-                        NoticeTitle: notice.noticeTitle,
-                        NoticeDetails: notice.noticeDetails,
-                        CourseCode: notice.courseCode,
-                        Faculty: notice.facultyId,
-                        Date: notice.date,
+                        _id: notice._id,
+                        noticeTitle: notice.noticeTitle,
+                        noticeDetails: notice.noticeDetails,
+                        courseCode: notice.courseCode,
+                        facultyId: notice.facultyId,
+                        date: notice.date,
                         more: {
                             Course: basePath + coursePath + "/" + notice.courseCode,
                             Faculty: basePath + facultyPath + "/" + notice.facultyId,
@@ -50,12 +50,12 @@ router.get("/recent", (req, res, next) => {
             const response = {
                 Notice: allNotice.map((notice) => {
                     return {
-                        NoticeId: notice._id,
-                        NoticeTitle: notice.noticeTitle,
-                        NoticeDetails: notice.noticeDetails,
-                        CourseCode: notice.courseCode,
-                        Faculty: notice.facultyId,
-                        Date: notice.date,
+                        _id: notice._id,
+                        noticeTitle: notice.noticeTitle,
+                        noticeDetails: notice.noticeDetails,
+                        nourseCode: notice.courseCode,
+                        faculty: notice.facultyId,
+                        date: notice.date,
                         more: {
                             Course: basePath + coursePath + "/" + notice.courseCode,
                             Faculty: basePath + facultyPath + "/" + notice.facultyId,
@@ -80,7 +80,7 @@ router.get("/:courseCode", (req, res, next) => {
             console.log(info);
             const respone = {
                 "Number of Notice": info.length,
-                Notices: info,
+                Notice: info,
             };
             res.status(200).json(respone);
         })

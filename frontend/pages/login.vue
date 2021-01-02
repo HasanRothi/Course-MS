@@ -58,15 +58,17 @@ export default {
     .then((res)=>{
      if(res[0].password === this.formValues.password){
       this.$store.dispatch("login/updateLoggedIn", { userRole, userId });
-      this.$router.push(`/${userRole}/${userId}`);
+      console.log('Auth Ok')
      }
      else{
       this.$store.dispatch('snackbar/callSnackbarInfo',{message:"Sorry ! Try again..",color:'#FF0000',time:"2000"})
       this.snackbar = true
+      return 
      }
     }).catch((err)=>{
       console.log(err)
     })
+    this.$router.push(`/${userRole}/${userId}`);
       // this.$store.dispatch("login/updateLoggedIn", { userRole, userId });
       // //  this.$router.redirect(`/${userRole}/${userId}`)
       // //  redirect(`/${userRole}/${userId}`)

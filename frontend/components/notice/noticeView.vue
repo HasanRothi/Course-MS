@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="!loading">
     <NoticeForm v-if="formOpen" :btnAction_Prop="btnAction" :courseCode_Prop="courseCode" :facultyId_Prop="facultyId" :NoticeTitle_Prop="NoticeTitle"/>
     <v-text-field
         v-model="searchNoticeItem"
@@ -14,7 +14,7 @@
          <v-row style="width:100% ; font-family:monospace;" >
      
         <v-col  cols="12"  v-for="notice in noticeDataFilter" :key="notice._id"
-          md="4">
+          md="6" sm="12">
           <v-card style="text-align:center" >
           <v-row>
             <v-col cols="12"  md="6">
@@ -45,7 +45,7 @@
               <v-btn @click="NoticeTitle=notice.NoticeTitle , formOpen=true " >
                <v-icon color="orange darken-2">mdi-pencil</v-icon>
              </v-btn>
-             <v-btn @click="removeNotice(notice.NoticeId)">
+             <v-btn @click="removeNotice(notice._id)">
                <v-icon color="red darken-2">mdi-delete</v-icon>
              </v-btn>
              </v-col>
@@ -70,29 +70,55 @@ export default {
       ALL_NOTICE :[],
       number_of_notice:"",
       searchNoticeItem:"",
-      NoticeTitle:""
+      NoticeTitle:"",
+      loading: true
     }
   },
   component(){
     NoticeForm
   },
   async created(){
+    if(this.courseCode != undefined){
     this.getNoticeData()
     // console.log(this.ALL_NOTICE+" ----- "+this.number_of_notice)
      this.$nuxt.$on("updateNotice", () => {
       console.log("Event bus for notice")
       this.getNoticeData();
+    })
+    };
+    if(!this.courseCode) {
+       this.getALLNotice()
+    // console.log('none', this.ALL_NOTICE+" ----- "+this.number_of_notice)
+     this.$nuxt.$on("updateNotice", () => {
+      console.log("Event bus for notice")
+      this.getALLNotice();
     });
-    
+    }
   },
-  
   methods:{
     async getNoticeData(){
-      console.log(this.courseCode)
-       await this.$axios.$get(`/coursenotice/${this.courseCode}`)
+    this.loading = true
+    console.log('Dukhse' , this.courseCode)
+    await this.$axios.$get(`/coursenotice/${this.courseCode}`)
     .then((res)=>{
-      this.ALL_NOTICE = res["Notices"]
-      this.number_of_notice = res["Number of Notice"]
+      this.ALL_NOTICE = res["Notice"]
+      this.number_of_notice = this.ALL_NOTICE.length
+       this.loading = false
+       console.log('hi')
+    }).catch((err)=>{
+      console.log(err)
+    })
+    },
+    async getALLNotice(){
+      this.loading = true
+      console.log('dukse')
+    console.log(this.courseCode)
+    await this.$axios.$get('/coursenotice')
+    .then((res)=>{
+      this.ALL_NOTICE = res["Notice"]
+      this.number_of_notice = this.ALL_NOTICE.length
+      console.log(this.ALL_NOTICE)
+      this.loading =false
     }).catch((err)=>{
       console.log(err)
     })
@@ -111,10 +137,9 @@ export default {
     }
   },
   computed:{
-    
     noticeDataFilter: function() {
       return this.ALL_NOTICE.filter(notice => {
-        return notice.noticeTitle.match(this.searchNoticeItem);
+          return notice.courseCode.match(this.searchNoticeItem);
       });
     }
 }

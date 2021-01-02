@@ -1,14 +1,15 @@
-post http://localhost:3000/student
+post https://ucam-it.herokuapp.com/student
 Content-Type: application/json
 
 {
-      "userId" : "16255002",
-     "name":"Nirab",
-     "password" : "naire1234",
+"userId" : "16255014",
+     "name":"Ahsan Habib Lipon",
+     "password" : "lipon2016",
      "dept" : "CSE",
      "phone":"015",
-     "mail":"nirab@gmail.com"
+     "mail":"lipon@gmail.com"
 }
+
 
 
 ###
@@ -49,5 +50,16 @@ Content-Type: application/json
       "total" : 20
 }
 
+###
+POST   https://ucam-it.herokuapp.com/course
+Content-Type: application/json
+
+{
+      "courseCode":"Android",
+      "courseCredit":"1.5",
+      "courseName" : "CSE-IT",
+      "facultyId" : 20,
+      "dept": "IT"
+}
 ###
 DELETE http://localhost:3000/library/5f962ff39fed0b24c89eff93

@@ -1,7 +1,6 @@
 <template>
   <div>
       <v-app-bar dense>
-          <v-btn class="light-blue accent-1" to="/"> <v-icon>mdi-home</v-icon> </v-btn>
           <v-spacer></v-spacer>
           <v-sheet elevation="6">
     <v-tabs
@@ -19,7 +18,6 @@
     </v-tabs>
   </v-sheet>
   <v-spacer></v-spacer>
-  <v-btn>Login</v-btn>
       </v-app-bar>
      <v-container>
           <v-expand-transition>
@@ -143,7 +141,7 @@
 import BookForm from '../../components/form/bookForm'
 export default {
 
-     layout: 'library',
+    //  layout: 'library',
         head() {
       return {
         title: `Course-MS| Library `

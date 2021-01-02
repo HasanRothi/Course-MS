@@ -1,7 +1,10 @@
 <template >
   <div>
     <v-row>
-    <v-carousel>
+    <v-carousel
+      hide-delimiter-background
+      delimiter-icon="mdi-minus"d
+    >
     <v-carousel-item
       v-for="(item,i) in items"
       :key="i"

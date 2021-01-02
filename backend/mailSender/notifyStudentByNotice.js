@@ -8,7 +8,7 @@ const notice = require("../api/routes/testStudent");
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: "hasanrothi99@gmail.com",
+    user: "forrukh@gmail.com",
     pass: "kemonaso999",
   },
 });
@@ -24,7 +24,7 @@ Student.find()
     //message sender layout
 
     var msg = {
-      from: "hasanrothi99@gmail.com",
+      from: "forrukh@gmail.com",
       to: studentList,
       subject: noticeTitleForStudent + " (" + noticeForCourse + ")",
       //   text: noticeDescriptionForStudent,

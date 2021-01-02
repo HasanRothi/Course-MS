@@ -72,7 +72,8 @@ export default {
     computed: {
     courseDataFilter: function() {
       return this.courseByStudent.filter(course => {
-        return course.courseCode.match(this.searchCourseItem);
+        // console.log(course)
+        return course.courseInfo.courseCode.match(this.searchCourseItem);
       });
     }
   },

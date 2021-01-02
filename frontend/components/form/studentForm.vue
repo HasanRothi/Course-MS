@@ -96,7 +96,7 @@ export default {
              password:"",
              mail:"",
              phone:"",
-             facultyInfo:[]
+             studentInfo:[]
         }
     },
     components: {
@@ -120,7 +120,7 @@ export default {
     },
     computed:{
       getStudentInfo(){
-        return this.facultyInfo = {
+        return this.studentInfo = {
           userId : this.formValues.userId,
           name :this.formValues.name ,
           password : this.formValues.password,
@@ -136,7 +136,7 @@ export default {
           this.update();
           return 
         }
-        // console.log(" Faculty info"+this.getStudentInfo)
+        console.log("Student info"+this.studentInfo)
          await  this.$axios.$post('/student',this.getStudentInfo)
             .then((res)=>{
                 console.log("Result "+res)
@@ -144,7 +144,7 @@ export default {
                 this.snackbar =true;
                 this.$nuxt.$emit("recallStudent");
             }).catch((err)=>{
-                console.log("AddError "+err)
+                console.log("Student Add Error "+err)
             })
 
 

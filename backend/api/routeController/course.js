@@ -99,6 +99,7 @@ exports.insert_course = (req, res, next) => {
         name: req.body.courseName,
         credit: req.body.courseCredit,
         faculty: req.body.facultyId,
+        dept: req.body.dept, 
     };
     console.log(singleCourse);
     //course data object
@@ -108,6 +109,7 @@ exports.insert_course = (req, res, next) => {
         courseName: req.body.courseName,
         courseCredit: req.body.courseCredit,
         facultyId: req.body.facultyId,
+        dept: req.body.dept
     });
 
     //insert query
