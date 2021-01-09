@@ -1,25 +1,22 @@
 <template>
   <v-container class="pa-16">
     <v-card class="pa-16" style="margin:10%;">
-      <FormulateForm
-        style="margin:15%;padding:10%"
-        v-model="formValues"
-        @submit="loginUser"
-      >
-        <FormulateInput
-          name="userId"
-          label="User Id"
-          validation="required"
-          icon="mdi-lock"
-        />
-        <FormulateInput
-          type="password"
-          name="password"
-          label="Password"
-          validation="required"
-        />
-        <FormulateInput type="submit" label="Login" />
-      </FormulateForm>
+      <v-form  ref="form"
+    v-model="valid" style="margin:15%;padding:10%">
+      <v-text-field
+      label="User"
+      :rules="rules"
+      hide-details="auto"
+      required
+      v-model="userId"
+    ></v-text-field>
+    <v-text-field label="Password" :rules="rules" required v-model="password" type="password"
+      hide-details="auto"></v-text-field>
+      
+        <v-btn block style="padding-top:10px;" :disabled="!valid" @click="loginUser()">
+        Login
+      </v-btn>
+      </v-form>
     </v-card>
      <snackBar v-if="snackbar" />
   </v-container>
@@ -36,7 +33,10 @@ export default {
   },
   data() {
     return {
-      formValues: {},
+       rules: [
+        value => !!value || 'Required.',
+      ],
+      valid: true,
       userId: "",
       password: "",
       snackbar: false
@@ -46,17 +46,17 @@ export default {
     snackBar
   },
   methods: {
-    async loginUser({ store, redirect }) {
+    async loginUser() {
       var userRole;
-      this.formValues.userId.length > 3
+      this.userId.length > 3
         ? (userRole = "student")
         : (userRole = "faculty");
-      var userId = this.formValues.userId;
-      console.log("Ok ---- "+userRole + userId)
+      var userId = this.userId;
+      // console.log("Ok ---- "+userRole + userId)
       //check auth
      await this.$axios.$get(`/${userRole}/${userId}`)
     .then((res)=>{
-     if(res[0].password === this.formValues.password){
+     if(res[0].password === this.password){
       this.$store.dispatch("login/updateLoggedIn", { userRole, userId });
       console.log('Auth Ok')
      }

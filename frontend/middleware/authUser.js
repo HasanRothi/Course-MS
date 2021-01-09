@@ -5,9 +5,9 @@ export default function({
 }) {
     // If the user is not authenticated
     var  x = store.getters["login/getLoggedIn"];
-    // console.log("inside auth middlewar - " + x.userRole)
+    console.log("inside auth middlewar - " + x.userRole)
     if (!x.userRole) {
-        console.log("lol")
+        console.log("UnAuthenticated")
         return redirect('/login')
     }
 }

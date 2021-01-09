@@ -136,7 +136,7 @@ export default {
           this.update();
           return 
         }
-        console.log("Student info"+this.studentInfo)
+        console.log("Student info"+this.getStudentInfo)
          await  this.$axios.$post('/student',this.getStudentInfo)
             .then((res)=>{
                 console.log("Result "+res)

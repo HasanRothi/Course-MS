@@ -78,6 +78,7 @@ export default {
     FacultyProfile,
     NoticeView
   },
+  middleware: 'authUser',
    data () {
     return {
       author : "",
