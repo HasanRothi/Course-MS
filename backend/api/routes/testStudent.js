@@ -3,7 +3,21 @@ const router = express.Router();
 const mongoose = require("mongoose");
 const Student = require("../database/model/testStudent");
 const nodemailer = require("nodemailer");
-
+// upload file (img)
+var multer  = require('multer')
+var upload = multer({ dest: 'uploads/' })
+//cloud storage
+var cloudinary = require('cloudinary').v2;
+//access file system
+const fs = require('fs')
+const { promisify } = require('util')
+const unlinkAsync = promisify(fs.unlink)
+//cloudinary apk
+cloudinary.config({ 
+    cloud_name: 'innweb', 
+    api_key: '469944758647419', 
+    api_secret: 'gERk5boSpadDRZAsbyouv8kDxso' 
+  });
 //Send mail to students
 
 const basePath = "https://ucam-it.herokuapp.com/";
@@ -89,8 +103,13 @@ router.get("/:studentId", (req, res, next) => {
 });
 
 //add new student
-router.post("/", (req, res, next) => {
-    //student data object
+router.post("/",upload.single('avatar'),(req, res, next) => {
+    console.log(req.file)
+    cloudinary.uploader.upload(req.file.path)
+    .then(async (result)=>{
+        // console.log(result)
+        await unlinkAsync(req.file.path) // remove file from local
+         //student data object
     const student = new Student({
         _id: new mongoose.Types.ObjectId(),
         userId: req.body.userId,
@@ -98,7 +117,8 @@ router.post("/", (req, res, next) => {
         password: req.body.password,
         phone: req.body.phone,
         mail: req.body.mail,
-        dept: req.body.dept
+        dept: req.body.dept,
+        avatar: result.url
     });
 
     //insert query
@@ -114,6 +134,12 @@ router.post("/", (req, res, next) => {
             console.log(err);
             res.status(500).json(err);
         });
+    })
+    .catch((err)=>{
+        console.log(err)
+        res.json(err)
+    })
+   
 });
 //add course
 router.post("/addcourse", (req, res, next) => {

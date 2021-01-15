@@ -8,6 +8,7 @@ const teststudentSchema = mongoose.Schema({
     password: { type: String, required: true, minlength: 5, maxlength: 12 },
     phone: { type: String, required: true },
     mail: { type: mongoose.Schema.Types.Email, required: true },
+    avatar: { type: String, required: true},
     courseList: [{
         courseInfo: {
             type: mongoose.Schema.Types.ObjectId,
