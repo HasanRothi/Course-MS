@@ -1,4 +1,3 @@
-/node_modules
-api.rest
+node_modules/
+api.rest/
 .env
-nodemon.json

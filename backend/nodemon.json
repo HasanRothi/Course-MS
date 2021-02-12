@@ -1,7 +1,0 @@
-{
-  "env": {
-    "MONGO_ATLAS_PASSWORD": "rothi420IT",
-    "DB_NAME": "course management system",
-    "JWT_SECRET": "UITS_IT"
-  }
-}
