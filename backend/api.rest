@@ -31,35 +31,27 @@ Content-Type: application/json
 Delete https://ucam-it.herokuapp.com/student/16255008
 
 ###
-Get  https://ucam-it.herokuapp.com/faculty
+Get  http://localhost:3000/faculty
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImlzaHRpYXEuaXFiYWxAaG90bWFpbC5jb20iLCJ1c2VySWQiOiJNSUkiLCJpYXQiOjE2MTMxMzY1OTIsImV4cCI6MTYxMzE0MDE5Mn0.QOFp_VQOqL36jS7cOPyv2ekqtisSQ9RM8U4qFSA9Ktg
+
+###
+POST  http://localhost:3000/faculty/auth/login
 Content-Type: application/json
 
 {
-      "dept" : "CIVIL"
+      "facultyId":"MII",
+      "facultyPassword":"MIIuits"
 }
 
 ###
-POST   https://ucam-it.herokuapp.com/library
-Content-Type: application/json
+GET http://localhost:3000/course/all
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImlzaHRpYXEuaXFiYWxAaG90bWFpbC5jb20iLCJ1c2VySWQiOiJNSUkiLCJpYXQiOjE2MTMxMzY1OTIsImV4cCI6MTYxMzE0MDE5Mn0.QOFp_VQOqL36jS7cOPyv2ekqtisSQ9RM8U4qFSA9Ktg
 
-{
-      "name":"Android",
-      "author":"Abc",
-      "category" : "CSE-IT",
-      "edition": 2,
-      "total" : 20
-}
 
-###
-POST   https://ucam-it.herokuapp.com/course
-Content-Type: application/json
-
-{
-      "courseCode":"Android",
-      "courseCredit":"1.5",
-      "courseName" : "CSE-IT",
-      "facultyId" : 20,
-      "dept": "IT"
-}
 ###
 DELETE http://localhost:3000/library/5f962ff39fed0b24c89eff93
+
+
+###
+POST http://localhost:3000/student
+Content-Type: application/x-www-form-urlencoded

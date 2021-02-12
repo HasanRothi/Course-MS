@@ -3,6 +3,7 @@ const basePath = "https://ucam-it.herokuapp.com/";
 const facultyPath = "faculty";
 const coursePath = "course";
 const mongoose = require("mongoose");
+const Sentry = require("@sentry/node");
 //get all students
 exports.get_all_student = (req, res, next) => {
 
@@ -123,7 +124,14 @@ exports.insert_course = (req, res, next) => {
             });
         })
         .catch((err) => {
-            console.log(err);
+            // console.log(err);
+            console.log('Error')
+            const transaction = Sentry.startTransaction({
+                op: "Add Student",
+                name: "My First Error Transaction",
+              });
+              Sentry.captureException(err);
+              transaction.finish();
             res.status(500).json(err);
         });
 };

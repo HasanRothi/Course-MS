@@ -3,7 +3,6 @@ const router = express.Router();
 const mongoose = require("mongoose");
 const Faculty = require("../database/model/faculty");
 const jwt = require("jsonwebtoken");
-const checkFacultyAuth = require("../middleware/checkFacultyAuth");
 
 //login Auth
 router.post("/login", (req, res, next) => {
@@ -18,20 +17,24 @@ router.post("/login", (req, res, next) => {
                         userId: result.userId,
                     },
                     process.env.JWT_SECRET, {
-                        expiresIn: "30000s",
+                        expiresIn: "1h",
                     }
                 );
                 console.log("Login success");
                 return res.json({ message: "Auth Success", token: token });
             } else {
-                console.log("Wrong Password");
+                // console.log("Wrong Password");
+                return res.json({message: 'Wrong Password'});
             }
         })
         .catch((error) => {
-            console.log("Invalid Faculty Id");
+            // console.log("Invalid Faculty Id");
+            return res.json(error);
         });
 });
 
 //Logout
-router.post("/logout", (req, res, next) => {});
+router.post("/logout", (req, res, next) => {
+    
+});
 module.exports = router;

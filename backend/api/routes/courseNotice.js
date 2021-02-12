@@ -3,9 +3,8 @@ const router = express.Router();
 const mongoose = require("mongoose");
 const CourseNotice = require("../database/model/courseNotice");
 
-const jwt = require("jsonwebtoken");
 
-const basePath = "https://ucam-it.herokuapp.com/";
+const basePath = process.env.API_BASE_PATH;
 const coursePath = "course";
 const facultyPath = "faculty";
 //notice list
@@ -139,7 +138,7 @@ router.post("/", (req, res, next) => {
             global.noticePostBy = req.body.facultyId;
             global.noticeDescriptionForStudent = req.body.noticeDetails;
             //4 global variable for send mail subject,body
-            const sendMail = require("../../mailSender/notifyStudentByNotice");
+            require("../../mailSender/notifyStudentByNotice");
             //End send mail
             res.status(200).json({
                 message: "Notice post uploaded",

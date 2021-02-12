@@ -3,13 +3,13 @@ const Student = require("../api/database/model/testStudent");
 const nodemailer = require("nodemailer");
 
 //Get value from api
-const notice = require("../api/routes/testStudent");
+const notice = require("../api/routes/testThing");
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: "forrukh@gmail.com",
-    pass: "kemonaso999",
+    user: process.env.MAIL_ID,
+    pass: process.env.MAIL_PASS,
   },
 });
 

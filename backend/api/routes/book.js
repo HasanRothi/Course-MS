@@ -3,7 +3,7 @@ const router = express.Router();
 const mongoose = require("mongoose");
 const Book = require("../database/model/book");
 
-const basePath = "https://ucam-it.herokuapp.com/";
+const basePath = process.env.API_BASE_PATH;
 //book list
 router.get("/", (req, res, next) => {
     Book.find()

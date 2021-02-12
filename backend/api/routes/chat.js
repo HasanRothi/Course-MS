@@ -5,7 +5,7 @@ const Chat = require("../database/model/chat");
 const moment = require('moment')
 
 
-const basePath = "https://ucam-it.herokuapp.com/";
+const basePath = process.env.API_BASE_PATH;
 //chat all
 router.get("/", (req, res, next) => {
     // console.log('log check ',req.connection.remoteAddress)
