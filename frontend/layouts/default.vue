@@ -65,6 +65,44 @@
         >
       <v-btn text to="/library"><v-icon>mdi-library</v-icon>Library</v-btn>
       </v-badge>
+      <v-menu
+        top
+        :offset-x="offsetx"
+        origin="center center"
+        transition="scale-transition"
+      >
+        <template v-slot:activator="{ on: menu, attrs }">
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on: tooltip }">
+               <v-badge
+            color="green"
+            :content="number_of_archive"
+            bordered
+            bottom
+            left
+            offset-x="10"
+            offset-y="10"
+        >
+              <v-btn text v-bind="attrs" v-on="{ ...tooltip, ...menu }" class="rounded-bl-xl">
+                <v-icon>mdi-archive-outline</v-icon>
+                Archive
+              </v-btn>
+               </v-badge>
+            </template>
+            <span>Explore Archive</span>
+          </v-tooltip>
+        </template>
+
+        <v-list class="#f0932b " >
+          <v-list-item v-for="(item, index) in itemDept" :key="index" link>
+            <v-list-item-title>
+              <v-btn block text class="orange" :to="`/archive/${item}`">
+                {{ item }}</v-btn
+              >
+            </v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
        <v-btn text to="/coding"  outlined color="blue"><v-icon>mdi-code-tags</v-icon>Coding</v-btn>
       <v-btn text v-if="userId" :to="`/${userRole}/${userId}`">
         <v-icon>mdi-account</v-icon>{{ userId }}</v-btn
@@ -130,6 +168,7 @@ export default {
     return {
       number_of_dept : 6,
       number_of_book: null,
+      number_of_archive: null,
       switch1: false,
       userId: null,
       userRole: null,
@@ -174,6 +213,15 @@ export default {
       .then(res => {
         console.log(res)
         this.number_of_book = res['Number of book']
+      })
+      .catch(err => {
+        console.log(err);
+      });
+       await this.$axios
+      .$get('/archive')
+      .then(res => {
+        console.log(res)
+        this.number_of_archive = res.length
       })
       .catch(err => {
         console.log(err);

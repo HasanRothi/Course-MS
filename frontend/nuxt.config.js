@@ -5,7 +5,7 @@ export default {
     // Global page headers (https://go.nuxtjs.dev/config-head)
     head: {
         titleTemplate: '%s',
-        title: 'frontend',
+        title: 'Universiy Management System',
         meta: [
             { charset: 'utf-8' },
             { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -73,9 +73,8 @@ export default {
         }
     },
     axios: {
-        baseURL: 'https://ucam-it.herokuapp.com', // Used as fallback if no runtime config is provided
+        baseURL: 'http://localhost:4000', // Used as fallback if no runtime config is provided
     },
-
     // Build Configuration (https://go.nuxtjs.dev/config-build)
     build: {}
 }

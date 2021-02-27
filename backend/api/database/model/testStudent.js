@@ -9,6 +9,9 @@ const teststudentSchema = mongoose.Schema({
     phone: { type: String, required: true },
     mail: { type: mongoose.Schema.Types.Email, required: true },
     avatar: { type: String, required: true},
+    fee : { type : Number},
+    paid : { type : Number },
+    balance : { type : Number },
     courseList: [{
         courseInfo: {
             type: mongoose.Schema.Types.ObjectId,

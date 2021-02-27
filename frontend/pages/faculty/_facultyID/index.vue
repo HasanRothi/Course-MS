@@ -54,6 +54,14 @@
          mdi-bell-alert
         </v-icon>Notice</v-btn>
         </v-tab>
+      <v-tab>
+        <v-btn @click="component='ArchiveForm'"> <v-icon
+          color="red darken-2"
+          left
+        >
+         mdi-archive-outline
+        </v-icon>Archive</v-btn>
+        </v-tab>
       </v-tabs>
     </v-card>
 
@@ -69,6 +77,7 @@ import CourseList from '../../../components/course/courseList'
 import FacultyOwn from '../../../components/faculty/facultyOwn'
 import FacultyProfile from '../../../components/faculty/facultyProfile'
 import NoticeView from '../../../components/notice/noticeView'
+import ArchiveForm from '../../../components/archive/add'
 export default {
   components: {
     StudentList,
@@ -76,7 +85,8 @@ export default {
     CourseList,
     FacultyOwn,
     FacultyProfile,
-    NoticeView
+    NoticeView,
+    ArchiveForm
   },
   middleware: 'authUser',
    data () {

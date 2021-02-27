@@ -2,12 +2,12 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
 const Faculty = require("../database/model/faculty");
-const checkAuth = require('../middleware/checkAuth')
+// const checkAuth = require('../middleware/checkAuth')
 
 const basePath = process.env.API_BASE_PATH;
 const facultyPath = "faculty";
 //faculty list
-router.get("/",checkAuth , (req, res, next) => {
+router.get("/", (req, res, next) => {
     Faculty.find()
         .select("userId name phone mail password dept")
         .exec()

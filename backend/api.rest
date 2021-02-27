@@ -51,7 +51,45 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImlzaHRpY
 ###
 DELETE http://localhost:3000/library/5f962ff39fed0b24c89eff93
 
+###
+GET http://localhost:3000/student/16255008
+###
+
+PATCH http://localhost:3000/student/lol
+Content-Type: application/json
+
+{
+      "phone": 105456678
+}
 
 ###
+PATCH http://localhost:3000/student/payment/16255008
+Content-Type: application/json 
+
+{
+      "payment":"34"
+}
+
+
+###
+GET  http://localhost:4000/archive/IT/Thesis
+
+###
+POST http://localhost:4000/archive
+Content-Type: application/json 
+
+{
+      "title":"Blockchain market",
+      "description" : "String E-commerce platform",
+      "dept":"IT",
+      "link":"https://scet.berkeley.edu/wp-content/uploads/BlockchainPaper.pdf",
+      "students":["Forrukh","Nirab","Suzon"],
+      "supervisor":"SHA",
+      "type":"Thesis"
+}
+
+###
+GET http://localhost:3000/archive
+
 POST http://localhost:3000/student
 Content-Type: application/x-www-form-urlencoded

@@ -18,6 +18,7 @@ const facultyAuth = require("./api/auth/facultyAuth");
 const studentInfo = require("./api/routes/testThing");
 const chat = require('./api/routes/chat')
 const book = require('./api/routes/book')
+const archive = require('./api/routes/archive')
 
 //connect mongodb atlas
 mongoose.connect(
@@ -34,13 +35,14 @@ app.use(
 );
 
 //api list
-app.use("/faculty",checkAuth, facultyRouter);
-app.use("/course",checkAuth , ccoRouter);
+app.use("/faculty", facultyRouter);
+app.use("/course", ccoRouter);
 app.use("/coursenotice", courseNotice);
 app.use("/faculty/auth", facultyAuth);
-app.use("/student",checkAuth, studentInfo);
+app.use("/student", studentInfo);
 app.use("/chat", chat);
 app.use("/library", book);
+app.use("/archive", archive);
 
 //handle error
 app.use((req, res, next) => {

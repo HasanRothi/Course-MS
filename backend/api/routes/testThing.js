@@ -171,6 +171,43 @@ router.post("/addcourse", (req, res, next) => {
         });
 });
 
+//update student info
+router.patch("/:studentId", (req, res, next) => {
+    const id = req.params.studentId;
+    console.log(id)
+    Student.updateOne({ userId: id }, { $set: req.body })
+        .exec()
+        .then((result) => {
+            console.log("Student Update successfully");
+            res.status(200).json({
+                message: 'Student Update successfully'
+            });
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+});
+router.patch ('/lol',(req,res)=>{
+    console.log('lol')
+})
+// payment
+router.patch("/payment/:studentId", (req, res, next) => {
+    // const id = req.params.studentId;
+    console.log('payment')
+    // Student.findByIdAndUpdate({ userId: id }, { $inc: paid + req.body.payment })
+    //     .exec()
+    //     .then((result) => {
+    //         console.log("Payment successfully");
+    //         res.status(200).json({
+    //             message: "Payment successfully"
+    //         });
+    //     })
+    //     .catch((err) => {
+    //         console.log(err);
+    //         res.status(500).json(err);
+    //     });
+});
 //Delete course
 router.delete("/removecourse/:studentId", (req, res, next) => {
     const studentid = req.params.studentid;

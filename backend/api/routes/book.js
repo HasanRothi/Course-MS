@@ -6,6 +6,7 @@ const Book = require("../database/model/book");
 const basePath = process.env.API_BASE_PATH;
 //book list
 router.get("/", (req, res, next) => {
+    console.log(req)
     Book.find()
         .select()
         .exec()
