@@ -76,7 +76,7 @@ router.get("/:courseCode", (req, res, next) => {
         .select()
         .exec()
         .then((info) => {
-            console.log(info);
+            // console.log(info);
             const respone = {
                 "Number of Notice": info.length,
                 Notice: info,
@@ -107,7 +107,7 @@ router.get("/:cousreCode/:title", (req, res, next) => {
 
 //Add new notice
 router.post("/", (req, res, next) => {
-
+    console.log(req.body)
     var d = Date(); // Using Date() method
     now = d.toString(); // Converting the number value to string
     const singleNotice = {
@@ -140,10 +140,11 @@ router.post("/", (req, res, next) => {
             //4 global variable for send mail subject,body
             require("../../mailSender/notifyStudentByNotice");
             //End send mail
-            res.status(200).json({
-                message: "Notice post uploaded",
-                noticeInfo: singleNotice,
-            });
+            console.log('end mail..')
+            // res.status(200).json({
+            //     message: "Notice post uploaded",
+            //     noticeInfo: singleNotice,
+            // });
         })
         .catch((err) => {
             console.log(err);

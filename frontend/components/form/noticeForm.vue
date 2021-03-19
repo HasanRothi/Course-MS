@@ -103,7 +103,7 @@ async created(){
          await  this.$axios.$post('/coursenotice',this.getNoticeInfo)
             .then((res)=>{
                 console.log("Result "+res)
-                this.$store.dispatch('snackbar/callSnackbarInfo',{message:"Successfully added new Faculty",color:"green",time:"4000"})
+                this.$store.dispatch('snackbar/callSnackbarInfo',{message:"Successfully added new Notice",color:"green",time:"4000"})
                 this.snackbarx =true;
                 this.$nuxt.$emit("updateNotice");
             }).catch((err)=>{

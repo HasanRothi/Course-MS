@@ -193,20 +193,20 @@ router.patch ('/lol',(req,res)=>{
 })
 // payment
 router.patch("/payment/:studentId", (req, res, next) => {
-    // const id = req.params.studentId;
-    console.log('payment')
-    // Student.findByIdAndUpdate({ userId: id }, { $inc: paid + req.body.payment })
-    //     .exec()
-    //     .then((result) => {
-    //         console.log("Payment successfully");
-    //         res.status(200).json({
-    //             message: "Payment successfully"
-    //         });
-    //     })
-    //     .catch((err) => {
-    //         console.log(err);
-    //         res.status(500).json(err);
-    //     });
+    const id = req.params.studentId;
+    console.log('payment',id,req.body)
+    Student.findByIdAndUpdate({ userId: id }, { $inc: {paid : req.body.payment} })
+        .exec()
+        .then((result) => {
+            console.log("Payment successfully");
+            res.status(200).json({
+                message: "Payment successfully"
+            });
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(500).json(err);
+        });
 });
 //Delete course
 router.delete("/removecourse/:studentId", (req, res, next) => {

@@ -3,11 +3,12 @@ const express = require("express");
 const app = express();
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
-const mongoose = require("mongoose");
-var cors = require('cors')
+const cors = require('cors')
 const Sentry = require("@sentry/node");
 const Tracing = require("@sentry/tracing");
 const checkAuth = require('./api/middleware/checkAuth')
+const logger = require('./config/logger')
+require('./config/database')
 
 
 //api route path
@@ -20,11 +21,6 @@ const chat = require('./api/routes/chat')
 const book = require('./api/routes/book')
 const archive = require('./api/routes/archive')
 
-//connect mongodb atlas
-mongoose.connect(
-    `mongodb+srv://rothi:${process.env.MONGODB_PASS}@cluster0.xt4sj.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`
-);
-
 app.use(cors());
 app.use(morgan("dev"));
 app.use(bodyParser.json());
@@ -33,7 +29,10 @@ app.use(
         extended: false,
     })
 );
-
+app.use( (req, res, done) => {
+    logger.info(req.hostname);
+    done();
+});
 //api list
 app.use("/faculty", facultyRouter);
 app.use("/course", ccoRouter);

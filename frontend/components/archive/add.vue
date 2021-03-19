@@ -100,7 +100,7 @@ export default {
       students:[],
       supervisors:'',
       link:'',
-      snackbar: true,
+      snackbar: false,
       text: 'Succesfully Added New Archive'
     }
   },
@@ -125,6 +125,7 @@ export default {
     await this.$axios.$post('/archive' , archiveList)
       .then((res)=>{
       // console.log(res)
+      this.snackbar = true
       this.title = ''
       this.description = ''
       this.link = ''

@@ -22,9 +22,9 @@ Student.find()
       studentList.push(l); // listing all students mail address
     });
     //message sender layout
-
+    console.log(studentList)
     var msg = {
-      from: "forrukh@gmail.com",
+      from: "hasanrothi99@gmail.com",
       to: studentList,
       subject: noticeTitleForStudent + " (" + noticeForCourse + ")",
       //   text: noticeDescriptionForStudent,
@@ -38,13 +38,16 @@ Student.find()
         noticePostBy +
         "</b>",
     };
-
+    console.log('mail send hoise..')
     //send mail function
     transporter.sendMail(msg, (error, info) => {
       if (error) {
         console.log(error);
       } else {
         console.log("Send mail success " + info);
+        res.status(200).json({
+          message: "Notice post uploaded"
+      });
       }
     });
   })

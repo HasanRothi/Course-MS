@@ -1,13 +1,14 @@
+
 post https://ucam-it.herokuapp.com/student
 Content-Type: application/json
 
 {
-"userId" : "16255014",
-     "name":"Ahsan Habib Lipon",
-     "password" : "lipon2016",
+"userId" : "16255015",
+     "name":"Fahim Hasan",
+     "password" : "fahim2016",
      "dept" : "CSE",
      "phone":"015",
-     "mail":"lipon@gmail.com"
+     "mail":"fahim@gmail.com"
 }
 
 
@@ -63,7 +64,7 @@ Content-Type: application/json
 }
 
 ###
-PATCH http://localhost:3000/student/payment/16255008
+PATCH http://localhost:4000/student/payment/16255015
 Content-Type: application/json 
 
 {
@@ -91,5 +92,14 @@ Content-Type: application/json
 ###
 GET http://localhost:3000/archive
 
-POST http://localhost:3000/student
-Content-Type: application/x-www-form-urlencoded
+
+###
+POST http://localhost:4000/coursenotice
+Content-Type: application/json
+
+{
+      "noticeTitle":"Class test api.rest 6",
+      "courseCode":"IT 223",
+      "facultyId":"SHA",
+      "noticeDetails":"Post from api.rest 6"
+}
