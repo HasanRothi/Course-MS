@@ -68,7 +68,7 @@ PATCH http://localhost:4000/student/payment/16255015
 Content-Type: application/json 
 
 {
-      "payment":"34"
+      "payment": 34
 }
 
 
@@ -90,7 +90,7 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:3000/archive
+GET http://localhost:4000/archive
 
 
 ###
@@ -98,8 +98,10 @@ POST http://localhost:4000/coursenotice
 Content-Type: application/json
 
 {
-      "noticeTitle":"Class test api.rest 6",
+      "noticeTitle":"Class test api.rest 7",
       "courseCode":"IT 223",
-      "facultyId":"SHA",
-      "noticeDetails":"Post from api.rest 6"
+      "facultyId":"SHA"
 }
+
+###
+GET http://localhost:4000/studet/16255011

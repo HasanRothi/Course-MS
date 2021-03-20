@@ -15,6 +15,12 @@
         >
          mdi-account
         </v-icon>Profile</v-btn>
+        <v-btn @click="component='StudentPayment'"> <v-icon
+        color="red darken-2"
+          left
+        >
+        mdi-cloud-lock
+        </v-icon>Payment</v-btn>
    </div>
     </v-card>
   </v-row>
@@ -25,6 +31,7 @@
 <script>
 import StudentProfile from '../../../components/student/studentProfile'
 import StudentOwn from '../../../components/student/studentOwn'
+import StudentPayment from '../../../components/student/studentPayment'
 export default {
   middleware: 'authUser',
     data(){
@@ -39,7 +46,8 @@ export default {
   },
  components:{
      StudentProfile,
-     StudentOwn
+     StudentOwn,
+     StudentPayment
  }
 };
 </script>

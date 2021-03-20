@@ -195,7 +195,7 @@ router.patch ('/lol',(req,res)=>{
 router.patch("/payment/:studentId", (req, res, next) => {
     const id = req.params.studentId;
     console.log('payment',id,req.body)
-    Student.findByIdAndUpdate({ userId: id }, { $inc: {paid : req.body.payment} })
+    Student.findOneAndUpdate({ userId : id }, { $inc: {paid : req.body.payment} })
         .exec()
         .then((result) => {
             console.log("Payment successfully");

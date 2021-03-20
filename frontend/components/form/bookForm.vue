@@ -130,7 +130,6 @@ export default {
           }
             await this.$axios.$post('/library' , this.getBookData)
               .then((res)=>{
-                console.log(res)
                 this.$nuxt.$emit("add-update-bookInfo");
               }).catch((err)=>{
                 console.log(err)
@@ -139,7 +138,6 @@ export default {
         async update(){
              await this.$axios.$patch(`/library/${this.bookID}` , this.getBookData)
               .then((res)=>{
-                console.log(res)
                 this.$nuxt.$emit("add-update-bookInfo");
               }).catch((err)=>{
                 console.log(err)

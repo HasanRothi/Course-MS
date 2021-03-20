@@ -54,6 +54,7 @@ export default {
          searchCourseItem:"",
          loading:true,
          studentId : this.$route.params.studentID,
+         totalCredit: 0
     }
   },
   async created(){ 
@@ -65,14 +66,13 @@ export default {
     }).catch((err)=>{
       console.log(err)
     })
-    // console.log(this.courseByStudent)
     this.loading = false
     
   },
     computed: {
     courseDataFilter: function() {
       return this.courseByStudent.filter(course => {
-        // console.log(course)
+        console.log(course)
         return course.courseInfo.courseCode.match(this.searchCourseItem);
       });
     }

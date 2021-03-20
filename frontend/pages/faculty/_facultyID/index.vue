@@ -56,11 +56,19 @@
         </v-tab>
       <v-tab>
         <v-btn @click="component='ArchiveForm'"> <v-icon
-          color="red darken-2"
+          color="green darken-2"
           left
         >
          mdi-archive-outline
         </v-icon>Archive</v-btn>
+        </v-tab>
+        <v-tab>
+        <v-btn @click="component='PaymentForm'"> <v-icon
+          color="red darken-2"
+          left
+        >
+         mdi-cloud-lock
+        </v-icon>Payment</v-btn>
         </v-tab>
       </v-tabs>
     </v-card>
@@ -78,6 +86,7 @@ import FacultyOwn from '../../../components/faculty/facultyOwn'
 import FacultyProfile from '../../../components/faculty/facultyProfile'
 import NoticeView from '../../../components/notice/noticeView'
 import ArchiveForm from '../../../components/archive/add'
+import PaymentForm from '../../../components/payment/add'
 export default {
   components: {
     StudentList,
@@ -86,7 +95,8 @@ export default {
     FacultyOwn,
     FacultyProfile,
     NoticeView,
-    ArchiveForm
+    ArchiveForm,
+    PaymentForm
   },
   middleware: 'authUser',
    data () {

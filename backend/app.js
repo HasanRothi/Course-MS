@@ -30,7 +30,14 @@ app.use(
     })
 );
 app.use( (req, res, done) => {
-    logger.info(req.hostname);
+    // logger.info(new Date(),req.method,'info',req.originalUrl);
+    // logger.info({
+    //     timestamp: new Date().toDateString(),
+    //     method: req.method,
+    //     level: 'info',
+    //     path: req.originalUrl
+    // })
+    logger.info(`[${new Date().toLocaleString()} / ${req.method}] : ${req.originalUrl}`)
     done();
 });
 //api list
